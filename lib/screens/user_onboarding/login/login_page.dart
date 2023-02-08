@@ -1,3 +1,4 @@
+import 'package:expense_app/screens/user_onboarding/forgotpassword/forgotpass_page.dart';
 import 'package:expense_app/screens/user_onboarding/signup/bottom_action.dart';
 import 'package:expense_app/screens/user_onboarding/signup/signup_page.dart';
 import 'package:expense_app/ui/custom_widget/custom_logo_stack.dart';
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   var userNameController = TextEditingController();
   var passController = TextEditingController();
 
-  final _formKey=GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +34,16 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Expanded(
                       child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
+                    width: double.infinity,
+                    height: double.infinity,
                     color: Theme.of(context).brightness == Brightness.light
                         ? MyColor.bgBColor
                         : MyColor.bgWColor,
-                    child: Center(child: CustomLogoStack(50,Theme.of(context).backgroundColor,Theme.of(context).canvasColor)),
+                    child: Center(
+                        child: CustomLogoStack(
+                            50,
+                            Theme.of(context).backgroundColor,
+                            Theme.of(context).canvasColor)),
                   )),
                   Expanded(
                       child: MediaQuery.of(context).size.height > 500
@@ -61,7 +66,10 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomLogoStack(width > 500 ? 50 : 34,Theme.of(context).backgroundColor,Theme.of(context).canvasColor),
+                CustomLogoStack(
+                    width > 500 ? 50 : 34,
+                    Theme.of(context).backgroundColor,
+                    Theme.of(context).canvasColor),
                 SizedBox(
                   height: 21,
                 ),
@@ -94,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 ////////////////Uname and Password Textfield//////////////////////
                 CustomTextField(
-                  errorMsg: 'Please Enter Email..',
+                    errorMsg: 'Please Enter Email..',
                     mcontroller: userNameController,
                     hint: 'Email Here..',
                     isPassword: false,
@@ -106,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 11,
                 ),
                 CustomTextField(
-                  errorMsg: 'Please Enter Password',
+                    errorMsg: 'Please Enter Password',
                     mcontroller: passController,
                     hint: 'Password Here..',
                     isPassword: true,
@@ -115,20 +123,42 @@ class _LoginPageState extends State<LoginPage> {
                         ? MyColor.secondaryWColor
                         : MyColor.secondaryBColor),
                 SizedBox(
+                  height: 11,
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ForgotPassPage()));
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: width > 500
+                            ? mTextStyle16(
+                                fontWieght: FontWeight.w300,
+                                mColor: Theme.of(context).shadowColor)
+                            : mTextStyle12(
+                                fontWieght: FontWeight.w300,
+                                mColor: Theme.of(context).shadowColor),
+                      ))
+                ]),
+                SizedBox(
                   height: 25,
                 ),
-                CustomRoundedButton(callback: () {
-                  if(_formKey.currentState!.validate()){
-                    Fluttertoast.showToast(msg: 'Login Successfully');
-                   /* ScaffoldMessenger.of(context).showSnackBar(const
+                CustomRoundedButton(
+                    callback: () {
+                      if (_formKey.currentState!.validate()) {
+                        Fluttertoast.showToast(msg: 'Login Successfully');
+                        /* ScaffoldMessenger.of(context).showSnackBar(const
                         SnackBar(content: Text('Processing Data'))
                      );*/
-                  }
-                }, text: 'Login'),
+                      }
+                    },
+                    text: 'Login'),
                 SizedBox(
                   height: 11,
                 ),
-                constraints.maxWidth > 400 ? Row(
+                constraints.maxWidth > 400
+                    ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: getChildren(
                             'Create a New Account', 'Sign-Up Now ', () {
@@ -137,15 +167,16 @@ class _LoginPageState extends State<LoginPage> {
                               MaterialPageRoute(
                                   builder: (context) => SignupPage()));
                         }, constraints.maxWidth, context),
-                      ) : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: getChildren(
                             'Create a New Account', 'Sign-up Now', () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignupPage()));
-                      }, width, context))
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()));
+                        }, width, context))
               ],
             ),
           ),
